@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Todos from "./todolist";
+import AddElement from "./AddElementToDo";
 
 class App extends Component {
 
@@ -18,10 +19,18 @@ class App extends Component {
       });
     };
 
+    addToDo = element => {
+        element.id = this.state.todoes[this.state.todoes.length-1].id + 1;
+        this.setState({
+            todoes: [...this.state.todoes, element]
+        })
+    };
+
     render() {
     return (
       <div className="App container">
         <h1 className="center blue-text">Todo's</h1>
+          <AddElement addNewElement={this.addToDo}/>
           <Todos todo={this.state.todoes} deleteElement={this.deleteToDo}/>
       </div>
     );
